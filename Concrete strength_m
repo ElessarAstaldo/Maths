@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+
+strenght_values = np.random.normal(loc=40, scale=5, size=50)
+concrete_data =  pd.DataFrame({'Strength': strenght_values})
+
+mean_strength = concrete_data['Strength'].mean()
+median_strength = concrete_data['Strength'].median()
+mode_strength = concrete_data['Strength'].mode()[0]
+variance_strength = concrete_data['Strength'].var()
+std_dev_strength = concrete_data['Strength'].std()
+
+print(f'Mean strenght: {mean_strength:.2f}')
+print(f'Median strenght: {median_strength:.2f}')
+print(f'Mode strenght : {mode_strength:.2f}')
+print(f'Variance strenght : {variance_strength:.2f}')
+print(f'Standard Deviation in strenght : {std_dev_strength:.2f}')
+
+if (mean_strength >= 40) and (std_dev_strength <=5):
+    print("Batch quality acceptable")
+else:
+    print("Batch quality not acceptable")
+
+
+iterations = 10000
+acceptable_batches = 0
+
+
+for _ in range(iterations):
+    strength_values = np.random.normal(loc=40, scale=5, size=50)
+    mean_strength = np.mean(strength_values)
+    std_strength = np.std(strength_values, ddof=1)  
+
+    if (mean_strength >= 40) and (std_strength <= 5):
+        acceptable_batches += 1
+
+
+probability = acceptable_batches / iterations
+print(f"Total iterations: {iterations}")
+print(f"Acceptable bathces: {acceptable_batches}")
+print(f"Estimated probability of an acceptable batch: {probability:.4f}")
+#Ran it a buch of times, about 2600/10000
