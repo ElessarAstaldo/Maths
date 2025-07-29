@@ -1,0 +1,21 @@
+import pandas as pd
+
+data = pd.read_csv('Length.csv')
+
+mean_length = data['length'].mean()
+median_length = data['length'].median()
+std_dev_length = data['length'].std()
+
+print(f"'mean:', {mean_length}, 'median:', {median_length}, 'std_dev:', {std_dev_length}")
+
+
+lower_limit = 98.00
+upper_limit = 102.00
+outliers = data[(data['length']< lower_limit) | (data['length'] > upper_limit)]
+print('Outliers:/n', outliers)
+
+percentile_25 = data['length'].quantile(0.25)
+percentile_75 = data['length'].quantile(0.75)
+print(f'25th Percentile', percentile_25)
+print(f'75th Percentile', percentile_75)
+print(f'interquartile range:', {percentile_75-percentile_25})
