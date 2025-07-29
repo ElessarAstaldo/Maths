@@ -1,0 +1,19 @@
+import numpy as np
+
+iterations = 10000
+acceptable_batches = 0
+
+
+for _ in range(iterations):
+    strength_values = np.random.normal(loc=40, scale=5, size=50)
+    mean_strength = np.mean(strength_values)
+    std_strength = np.std(strength_values, ddof=1)  
+
+    if (mean_strength >= 40) and (std_strength <= 5):
+        acceptable_batches += 1
+
+
+probability = acceptable_batches / iterations
+print(f"Total iterations: {iterations}")
+print(f"Acceptable bathces: {acceptable_batches}")
+print(f"Estimated probability of an acceptable batch: {probability:.4f}")
