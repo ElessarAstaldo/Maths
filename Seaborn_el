@@ -1,0 +1,20 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+import pandas as pd
+
+# Load the dataset
+data = pd.read_csv('2019_Bermuda_wind_simulation.csv')
+print(data.columns)
+# Convert local_time to datetime
+data['local_time'] = pd.to_datetime(data['local_time'])
+
+# Extract month and hour for further analysis
+data['month'] = data['local_time'].dt.month
+data['hour'] = data['local_time'].dt.hour
+
+print(data.head())
+
+sns.lineplot(data = data, x = 'month', y = 'electricity (kW)')
+plt.title('Electricity Consumption by month')
+plt.savefig('elpermoth.png')
