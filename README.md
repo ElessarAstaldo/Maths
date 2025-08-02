@@ -1,2 +1,2 @@
 # Maths
-Mostly others code I think is cool.
+Code I do and or steal for fun.
