@@ -13,8 +13,20 @@ data['local_time'] = pd.to_datetime(data['local_time'])
 data['month'] = data['local_time'].dt.month
 data['hour'] = data['local_time'].dt.hour
 
-print(data.head())
+# Extract month and hour for further analysis
+data['month'] = data['local_time'].dt.month
+data['hour'] = data['local_time'].dt.hour
+
+grouped_by_hour = data.groupby(by='hour')
+mean_electricity_by_hour = grouped_by_hour ['electricity (kW)'].mean()
+
+sns.lineplot(x = mean_electricity_by_hour.index, y = mean_electricity_by_hour.values)
+plt.title('Average Generated elecricity of Bermuda winds per hour')
+plt.xlabel('Hour of the Day')
+plt.ylabel('Elecricity Generation (kW)')
+plt.savefig('Caribean_wind.png')
 
 sns.lineplot(data = data, x = 'month', y = 'electricity (kW)')
-plt.title('Electricity Consumption by month')
+plt.title('Electricity Consumption by month (Orange), Average per hour (Blue)')
 plt.savefig('elpermoth.png')
+
